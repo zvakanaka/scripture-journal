@@ -87,7 +87,6 @@ function database(stringified, url) {
       	}
     	}
       //build sidebar
-	    document.querySelector("#entries-list").innerHTML = '';
 	    document.getElementById('entries-heading').appendChild(makeUL(data));
     }
   };
@@ -116,6 +115,9 @@ function countWords(idOfBox, numWordsRequired) {
 }
 
 function makeUL(data) {
+  	console.log(document.querySelector("#entries-list"));
+  	document.querySelector("#entries-list").innerHTML = '';
+  	    
     // create list element
     var list = document.createElement('ul');
 	  list.setAttribute("id", "entries-list");
