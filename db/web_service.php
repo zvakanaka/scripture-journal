@@ -11,32 +11,18 @@ $action = $cleanData["action"];
 $email = $cleanData["user"];
 
 require 'load_db.php';
-try {
+//try {
   GLOBAL $db;
   $db = loadDB();
-  
-  if ($action == "check-email") {
-    
-    $userCheckQuery = 'select user_id from user where email = :email';
-    $userCheckStmnt = $db->prepare($userCheckQuery);
-    $userCheckStmnt->bindParam(':email', $email);
-    $userCheckStmnt->execute();
-    $row = $userCheckStmnt->fetch();
-    if (!$row) {
-      $insertUserQuery = 'insert into user values(null, :email, null)';
-      $insertUserStmnt = $db->prepare($insertUserQuery);
-      $insertUserStmnt->bindParam(':email', $email);
-      $insertUserStmnt->execute();
-    }
-    
+
   echo "dude";
-  }
-catch (Exception $ex)
-{
+//  }
+//catch (Exception $ex)
+//{
   //$error = '{"error": "'.$ex'"}';
   //echo $error;
   die();
-};
+//};
 /*
 
   if ($action == "check-email") {
