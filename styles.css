@@ -1,0 +1,28 @@
+#greeting {
+  background-color: #F8F8F8;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  margin: 15px;
+}
+
+.thoughts {
+}
+
+.hidden {
+  display: none;
+}
+#past-thoughts-title {
+    title: "hi";
+  }
+#ponder-question {
+  
+}
+#question {
+  
+}
+#promptings::before {
+  content: "Promptings";
+}
+#share::before {
+  
+}
