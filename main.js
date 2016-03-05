@@ -79,7 +79,7 @@ function database(stringified, url) {
     	data = JSON.parse(data);
     	if (data.error !== undefined) {
     	  console.log('ERROR: '+data.error);
-    	} else{                 //all is well
+    	} else {                 //all is well
       	var user = data.user;
       	console.log('Received from DB: '+user);
       	for (var i = 0; i < data.entry.length; i++) {
@@ -87,6 +87,8 @@ function database(stringified, url) {
   			  console.log('Question: '+question);
       	}
     	}
+      //build sidebar
+	    document.getElementById('entries-heading').appendChild(makeUL(data));
     }
   };
   http.send(stringified);
@@ -111,6 +113,32 @@ function countWords(idOfBox, numWordsRequired) {
   if (words >= numWordsRequired) {  
     counter.style.color = 'green';
   }
+}
+
+function makeUL(data) {
+    // create list element
+    var list = document.createElement('ul');
+	  //list.setAttribute("class", "nav-ul");
+
+    for(var i = 0; i < data.entry.length; i++) {
+        var question = data.entry[i].question;
+  			console.log('Question: '+question);
+        // create li element
+        var item = document.createElement('li');
+        //TODO: put this in the JSON 
+        //item.setAttribute("title", arr.nav[i].text);
+
+    		var a = document.createElement('a');
+    		//a.setAttribute("onclick", arr.baseUrl +'/'+ data.entry[i].url);
+    		a.appendChild(document.createTextNode(data.entry[i].date));
+
+        // set li contents:
+        item.appendChild(a);
+
+        // add li to list
+        list.appendChild(item);
+    }
+    return list;
 }
 
 /***************************
