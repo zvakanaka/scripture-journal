@@ -9,7 +9,7 @@ $cleanData = json_decode($postedData, true);
 $action = $cleanData["action"];
 
 require 'load_db.php';
-//try {
+try {
   //GLOBAL $db;
   $db = loadDB();
 
@@ -37,15 +37,15 @@ require 'load_db.php';
   
     echo $prize;
   }
-/*}
+}
 catch (Exception $ex)
 {
-  $error = '{"error": "'.$ex'"}';
-  echo $error;
+  //$error = '{"error": "'.$ex'"}';
+  //echo $error;
   die();
 };
 
-die();*/
+die();
 /*
 //decide whether to insert. alternatively select only
 $shouldInsert = $cleanData["hours"];
