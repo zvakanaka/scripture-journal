@@ -39,6 +39,10 @@ if ($entryRow)
  while($entryRow = $stmnt->fetch())
   {
     $entryId = $entryRow['entry_id'];
+    $pastThought = $entryRow['past_thought'];
+     $ponderQuestion = $entryRow['ponder_question'];
+    $question = $entryRow['question']);
+    $date = $entryRow['entry_date']);
    /* $entryId = $entryRow['entry_id'];
     $pastThought = $entryRow['past_thought'];
     $ponderQuestion = $entryRow['ponder_question'];
