@@ -9,9 +9,16 @@ $cleanData = json_decode($postedData, true);
 $action = $cleanData["action"];
 
 require 'load_db.php';
-//try {
-  //GLOBAL $db;
-  //$db = loadDB();
+try {
+  GLOBAL $db;
+  $db = loadDB();
+}
+catch (Exception $ex)
+{
+  $error = '{"error": "'.$ex'"}';
+  echo $error;
+  die();
+};
 
   if ($action == "check-email") {
     $email = $cleanData["user"];
