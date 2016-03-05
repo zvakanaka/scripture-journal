@@ -115,8 +115,9 @@ function countWords(idOfBox, numWordsRequired) {
 }
 
 function makeUL(data) {
-  	console.log(document.querySelector("#entries-list"));
-  	document.querySelector("#entries-list").innerHTML = '';
+  	if (document.querySelector("#entries-list") !== null) {
+  	  document.querySelector("#entries-list").innerHTML = '';
+  	}
   	    
     // create list element
     var list = document.createElement('ul');
