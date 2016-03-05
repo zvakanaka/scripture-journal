@@ -16,7 +16,7 @@ try {
   $db = loadDB();
   if ($action == "check-email") {
     
-  echo "dudess";
+  echo $db;
     }
   echo "dude";
   }
