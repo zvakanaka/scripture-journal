@@ -34,14 +34,20 @@ try {
     //remove trailing comma
     $prize = rtrim($prize, ",");
     $prize .= ']}';
+    
+/*        $prize = '{"user": "'.$email.'", "journal":[';
+    $prize .= '{"question":"'."variable here".'"},';
+    //remove trailing comma
+    $prize = rtrim($prize, ",");
+    $prize .= ']}';*/
   
     echo $prize;
   }
 }
 catch (Exception $ex)
 {
-  //$error = '{"error": "'.$ex'"}';
-  //echo $error;
+  $error = '{"error": "'.$ex'"}';
+  echo $error;
   die();
 };
 
