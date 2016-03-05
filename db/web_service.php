@@ -10,7 +10,7 @@ $action = $cleanData["action"];
 
 require 'load_db.php';
 try {
-  GLOBAL $db;
+  //GLOBAL $db;
   $db = loadDB();
 }
 catch (Exception $ex)
