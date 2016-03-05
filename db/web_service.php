@@ -32,7 +32,26 @@ try {
     $stmnt->bindParam(':email', $email);
     $stmnt->execute();
 
-  echo "dude";
+$entries = '{"user": "'.$email.'", "entry":[';
+  while($row = $stmnt->fetch())
+  {
+    $entryId = $row['entry_id'];
+    $pastThought = $row['past_thought'];
+    $ponderQuestion = $row['ponder_question'];
+    $question = $row['question']);
+    $date = $row['entry_date']);
+    $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+    .'","pastThought":"'.$pastThought
+    .'","question":"'.$question
+    .'","ponderQuestion":"'.$ponderQuestion.'"},';
+  }
+  //remove trailing comma
+  $entries = rtrim($entries, ",");
+  $entries .= ']}';
+
+  echo $entries;
+  
+  //echo "dude";
   }
 catch (Exception $ex)
 {
