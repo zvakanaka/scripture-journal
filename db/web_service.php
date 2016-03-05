@@ -8,7 +8,7 @@ $cleanData = json_decode($postedData, true);
 
 $action = $cleanData["action"];
 
-//require 'load_db.php';
+require 'load_db.php';
 //try {
   //GLOBAL $db;
   //$db = loadDB();
