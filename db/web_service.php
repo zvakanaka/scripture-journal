@@ -13,7 +13,7 @@ $email = $cleanData["user"];
 require 'load_db.php';
 /*try {
   GLOBAL $db;
-  $db = loadDB();
+  */$db = loadDB();/*
 
   if ($action == "check-email") {
     
