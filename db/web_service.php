@@ -47,7 +47,7 @@ try {
     
   }
 
-  $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
   $stmnt = $db->prepare($query);
   $stmnt->bindParam(':email', $email);
   $stmnt->execute();
@@ -60,13 +60,18 @@ try {
     {
       $entryId = $entryRow['entry_id'];
       $pastThought = $entryRow['past_thought'];
-       $ponderQuestion = $entryRow['ponder_question'];
+      $ponderQuestion = $entryRow['ponder_question'];
       $question = $entryRow['question'];
+      $share = $entryRow['sharing'];
+      $prompting = $entryRow['prompting'];
       $date = $entryRow['entry_date'];
+      
     //TODO: add share and others
       $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
       .'","pastThought":"'.$pastThought
       .'","question":"'.$question
+      .'","share":"'.$share
+      .'","promptings":"'.$prompting
       .'","ponderQuestion":"'.$ponderQuestion.'"},';
     }
   }

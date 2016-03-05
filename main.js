@@ -114,7 +114,16 @@ function countWords(idOfBox, numWordsRequired) {
   }
 }
 
+function populateEntryForm(entry) {
+  document.querySelector("#past-thoughts-text").value = entry.pastThought;
+  document.querySelector("#ponder-question-text").value = entry.ponderQuestion;
+  document.querySelector("#question-text").value = entry.question;
+  document.querySelector("#share-text").value = entry.share;
+  document.querySelector("#promptings-text").value = entry.promptings;
+}
+
 function makeUL(data) {
+  //TODO: erase list of past users
   	//if (document.querySelector("#entries-list").innerHTML !== null) {
   	  //document.querySelector("#entries-list").innerHTML = '';
   	//}
@@ -132,7 +141,7 @@ function makeUL(data) {
         //item.setAttribute("title", arr.nav[i].text);
 
     		var a = document.createElement('a');
-    		//a.setAttribute("onclick", arr.baseUrl +'/'+ data.entry[i].url);
+    		a.setAttribute("onclick", populateEntryForm(data.entry[i]));
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:
