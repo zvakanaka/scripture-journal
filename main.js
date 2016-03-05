@@ -115,6 +115,7 @@ function countWords(idOfBox, numWordsRequired) {
 }
 
 function populateEntryForm(entry) {
+  console.log('POPULATE ENTRY');
   document.querySelector("#past-thoughts-text").value = entry.pastThought;
   document.querySelector("#ponder-question-text").value = entry.ponderQuestion;
   document.querySelector("#question-text").value = entry.question;
@@ -141,7 +142,7 @@ function makeUL(data) {
         //item.setAttribute("title", arr.nav[i].text);
 
     		var a = document.createElement('a');
-    		a.setAttribute("onclick", populateEntryForm(data.entry[i]));
+    		a.setAttribute("onclick", 'populateEntryForm(data.entry[i])');
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:
