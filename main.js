@@ -46,8 +46,10 @@ function database(stringified, url) {
     	var data = (http.responseText);
     	console.log(data);
     	data = JSON.parse(data);
-    	for (var i = 0; i < data.times.length; i++) {
-			  var foundHour = data.times[i].hour;
+    	var user = data.user;
+    	console.log('Received from DB: '+user);
+    	for (var i = 0; i < data.journal.length; i++) {
+			  var question = data.question[i];
     	}
     }
   };
