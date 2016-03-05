@@ -2,7 +2,7 @@
 function loadDB() {
   ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
-error_log( "Hello, errors! from load_db" );
+error_log( "Load db" );
 
 $dbHost = "";
 $dbUser = "";

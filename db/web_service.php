@@ -1,7 +1,7 @@
 <?php
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
-error_log( "Hello, errors! from webservice " );
+error_log( "Web service!" );
 
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
@@ -10,7 +10,7 @@ $action = $cleanData["action"];
 
 $email = $cleanData["user"];
 
-require 'load_db.php';
+require 'load_db.php';/*
 try {
   GLOBAL $db;
   $db = loadDB();
