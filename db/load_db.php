@@ -30,3 +30,4 @@ GLOBAL $db;
 $db = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPassword);
 return $db;
 }
+?>
