@@ -24,6 +24,7 @@
 }
 
 #aside ul {
+     cursor: pointer;
   list-style-type: none;
    padding:0; margin:0;/*no indentation*/
 }
