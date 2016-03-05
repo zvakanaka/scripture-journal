@@ -143,7 +143,8 @@ function makeUL(data) {
     // create list element
     var list = document.createElement('ul');
 	  list.setAttribute("id", "entries-list");
-
+    list.setAttribute("class", "list-group");
+    
     for(var i = 0; i < data.entry.length; i++) {
         var question = data.entry[i].question;
   			console.log('Question: '+question);
@@ -155,6 +156,7 @@ function makeUL(data) {
     		var a = document.createElement('a');
 
     		a.setAttribute("id", "entry-li-"+i);
+    		a.setAttribute("class", "list-group-item");
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:
