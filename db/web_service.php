@@ -17,7 +17,10 @@ try {
   if ($action == "check-email") {
     $userCheckQuery = 'select user_id from user where email = :email';
     $userCheckStmnt = $db->prepare($userCheckQuery);
+    echo "email";
     $userCheckStmnt->bindParam(':email', $email);
+    $userCheckStmnt->execute();
+    
   }
   echo "dude";
   }
