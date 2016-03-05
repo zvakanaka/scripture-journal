@@ -10,15 +10,8 @@ $action = $cleanData["action"];
 
 require 'load_db.php';
 try {
-  //GLOBAL $db;
+  GLOBAL $db;
   $db = loadDB();
-}
-catch (Exception $ex)
-{
-  //$error = '{"error": "'.$ex'"}';
-  //echo $error;
-  die();
-};
 
   if ($action == "check-email") {
     $email = $cleanData["user"];
@@ -44,6 +37,14 @@ catch (Exception $ex)
   
     echo $prize;
   }
+}
+catch (Exception $ex)
+{
+  //$error = '{"error": "'.$ex'"}';
+  //echo $error;
+  die();
+};
+
 /*}
 catch (Exception $ex)
 {
