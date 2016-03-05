@@ -3,20 +3,52 @@ $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
 
 $action = $cleanData["action"];
-if ($cleanData["action"] == "check-email") {
-  $user = $cleanData["user"];
-  $prize = '{"user": "'.$user.'", "journal":[';
-  $prize .= '{"question":"'."variable here".'"},';
-  //remove trailing comma
-  $prize = rtrim($prize, ",");
-  $prize .= ']}';
 
-  echo $prize;
+require 'load_db.php';
+try {
+  GLOBAL $db;
+  $db = loadDB();
+
+  if ($action == "check-email") {
+    $email = $cleanData["user"];
+  
+    $userCheckQuery = 'select name from user where email = :email';
+    $userCheckStmnt = $db->prepare($userCheckQuery);
+    $userCheckStmnt->bindParam(':email', $email);
+    $userCheckStmnt->execute();
+    $row = $userCheckStmnt->fetch();
+    if (!$row) {
+      $insertUserQuery = 'insert into user values(null, :email, null)';
+      $insertUserStmnt = $db->prepare($insertUserQuery);
+      //$insertUserStmnt->bindParam(':name', $user);
+      $insertUserStmnt->bindParam(':email', $email);
+      $insertUserStmnt->execute();
+    }
+  
+    $prize = '{"user": "'.$email.'", "journal":[';
+    $prize .= '{"question":"'."variable here".'"},';
+    //remove trailing comma
+    $prize = rtrim($prize, ",");
+    $prize .= ']}';
+  
+    echo $prize;
+  } else if ($action == "insert-entry") {
+  
+  }
+  
+
 }
+catch (Exception $ex)
+{
+  echo "Error with DB. ".$ex;
+  die();
+};
 
+die();
+/*
 //decide whether to insert. alternatively select only
 $shouldInsert = $cleanData["hours"];
-/*
+
 if ($shouldInsert) {
   $hours = $cleanData["hours"];
   $appointLocation = $cleanData["location"];
@@ -32,7 +64,7 @@ try {
     //does user name exist?
     //fetch whether exists
     //if not, insert
-     $userCheckQuery = 'select name from user where name = :name and email = :email';
+     $userCheckQuery = 'select name from user where email = :email';
       $userCheckStmnt = $db->prepare($userCheckQuery);
       $userCheckStmnt->bindParam(':name', $user);
       $userCheckStmnt->bindParam(':email', $email);
