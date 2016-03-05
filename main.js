@@ -1,9 +1,6 @@
 var element = document.querySelector("#greeting");
 element.innerText = "Scripture Journal";
 
-var email = document.querySelector("#user-email");
-email.value = localStorage.getItem('user-email');
-
 /***************************
  * Save Journal
  ***************************/
@@ -38,14 +35,12 @@ var saveJournal = function() {
 /***************************
  * Check Email
  ***************************/
-function checkEmail(email) {
+var checkEmail = function(email) {
   localStorage.setItem('user-email', email.value);
   console.log('Email is ' + email.value);
   
-  //TODO: call database to check email
-  var emailConfirm = document.querySelector("#"+email.getAttribute('id')+"-confirm");
-  emailConfirm.className = "label label-success";
-  emailConfirm.innerHTML = 'Email Found';
+  //call database to check email later
+  var emailConfirm = document.querySelector("#user-email-confirm");
   emailConfirm.className = "label label-danger";
   emailConfirm.innerHTML = 'Invalid email';
   
@@ -61,7 +56,7 @@ function checkEmail(email) {
 	
   //call database to insert
   database(stringified, 'db/web_service.php');
-}
+};
 
 /***************************
  * Upload or pull journal data
@@ -81,6 +76,10 @@ function database(stringified, url) {
     	  console.log('ERROR: '+data.error);
     	} else {                 //all is well
       	var user = data.user;
+      	var emailConfirm = document.querySelector("#user-email-confirm");
+        emailConfirm.className = "label label-success";
+        emailConfirm.innerHTML = 'Email Found';
+        
       	console.log('Received from DB: '+user);
       	for (var i = 0; i < data.entry.length; i++) {
   			  var question = data.entry[i].question;
@@ -139,6 +138,12 @@ function makeUL(data) {
         list.appendChild(item);
     }
     return list;
+}
+
+var email = document.querySelector("#user-email");
+email.value = localStorage.getItem('user-email');
+if (email.value !== '') {
+  checkEmail(email);
 }
 
 /***************************
