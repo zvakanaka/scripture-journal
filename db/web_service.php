@@ -35,8 +35,6 @@ try {
   } else if ($action == "insert-entry") {
   
   }
-  
-
 }
 catch (Exception $ex)
 {
