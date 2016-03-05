@@ -27,6 +27,11 @@ try {
       $insertUserStmnt->execute();
     }
   }
+  $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+    $stmnt = $db->prepare($query);
+    $stmnt->bindParam(':email', $email);
+    $stmnt->execute();
+
   echo "dude";
   }
 catch (Exception $ex)
