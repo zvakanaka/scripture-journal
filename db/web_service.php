@@ -61,9 +61,6 @@ try {
     $prize .= ']}';
     echo $prize;//*/
     
-  } else if ($action == "insert-entry") {
-    
-  
   }
 }
 catch (Exception $ex)
