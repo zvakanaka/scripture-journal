@@ -59,7 +59,7 @@ try {
     $insertEntryStmnt = $db->prepare($insertEntryQuery);
     $insertEntryStmnt->bindParam(':email', $email);
       
-    $insertThought = $cleanData["thought"];
+    $insertThought = $cleanData["thoughts"];
     $insertPonder = $cleanData["ponder"];
     $insertQuestion = $cleanData["question"];
     $insertPrompting = $cleanData["promptings"];
