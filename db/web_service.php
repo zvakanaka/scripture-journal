@@ -1,19 +1,19 @@
 <?php
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
-error_log( "Hello, errors!" );
+error_log( "Hello, errors! from webservice " );
 
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
 
 $action = $cleanData["action"];
 
+$email = $cleanData["user"];
+
 require 'load_db.php';
 try {
   GLOBAL $db;
   $db = loadDB();
-
-  $email = $cleanData["user"];
 
   if ($action == "check-email") {
     
