@@ -58,12 +58,12 @@ try {
     $insertEntryQuery = 'insert into entry values (null, (select user_id from user where email = :email), :insertThought, :insertPonder, :insertQuestion, :insertPrompting, :insertShare, utc_date)';
     $insertEntryStmnt = $db->prepare($insertEntryQuery);
     $insertEntryStmnt->bindParam(':email', $email);
-    
-    $insertThought = $cleanData["insertThought"];
-    $insertPonder = $cleanData["insertPonder"];
-    $insertQuestion = $cleanData["insertQuestion"];
-    $insertPrompting = $cleanData["insertPrompting"];
-    $insertShare = $cleanData["insertShare"];
+      
+    $insertThought = $cleanData["thought"];
+    $insertPonder = $cleanData["ponder"];
+    $insertQuestion = $cleanData["question"];
+    $insertPrompting = $cleanData["promptings"];
+    $insertShare = $cleanData["share"];
     
     $insertEntryStmnt->bindParam(':insertThought', $insertThought);
     $insertEntryStmnt->bindParam(':insertPonder', $insertPonder);
@@ -71,7 +71,7 @@ try {
     $insertEntryStmnt->bindParam(':insertPrompting', $insertPrompting);
     $insertEntryStmnt->bindParam(':insertShare', $insertShare);
     $insertEntryStmnt->execute();
-  
+    
   }
 }
 catch (Exception $ex)

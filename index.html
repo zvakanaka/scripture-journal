@@ -13,32 +13,35 @@
 <body>
   <div id="greeting"></div>
 
-<label>Email</label>
-  <input type="email" id="user-email" onChange="checkEmail(this);"/> 
-    <span id="user-email-confirm" class="hidden"></span>
-
-<h2 id="past-thoughts-title" title="Study Journal: In 100 words or more, write about something you learned from doing the reading assignment OR something that really struck you from class.  Remember that the reading you are reporting on is from the PREVIOUS class.  You may share insights you gained, questions you have, stories about principles you have studied. ">Past Thoughts</h2>
-  <textarea id="past-thoughts-text" onKeyUp="countWords(this.id, 100)" class="thoughts" name="message" rows="7" cols="30"></textarea>
+<form id="schedule_form" action="#" method="POST" enctype="multipart/form-data">
+  <label>Email</label>
+  <input name="email" type="email" id="user-email" onChange="checkEmail(this);"/> 
+  <span id="user-email-confirm" class="hidden"></span>
+    
+  <h2 id="past-thoughts-title" title="Study Journal: In 100 words or more, write about something you learned from doing the reading assignment OR something that really struck you from class.  Remember that the reading you are reporting on is from the PREVIOUS class.  You may share insights you gained, questions you have, stories about principles you have studied. ">
+    Past Thoughts</h2>
+  <textarea name="thoughts" id="past-thoughts-text" onKeyUp="countWords(this.id, 100)" class="thoughts" name="message" rows="7" cols="30"></textarea>
   <p id="past-thoughts-text-counter"></p>
   <button data-copytarget="#past-thoughts-text">Copy</button>
 
   <h2>Ponder Question</h2>
-  <textarea id="ponder-question-text" onKeyUp="countWords(this.id, 50)" class="thoughts" name="message" rows="7" cols="30"></textarea>
+  <textarea name="ponder" id="ponder-question-text" onKeyUp="countWords(this.id, 50)" class="thoughts" name="message" rows="7" cols="30"></textarea>
   <p id="ponder-question-text-counter"></p>
 
   <h2>Question</h2>
-  <textarea id="question-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
+  <textarea name="question" id="question-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
     <p id="question-text-counter"></p>
     
   <h2>Promptings</h2>
-  <textarea id="promptings-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
+  <textarea name="promptings" id="promptings-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
     <p id="promptings-text-counter"></p>
     
   <h2>Sharing</h2>
-  <textarea id="share-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
+  <textarea name="share" id="share-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
     <p id="share-text-counter"></p>
     
   <input id="submit_button" onclick="saveJournal();event.preventDefault();" type="button" value="Save in Journal">
+  </form>
   
   <script src="main.js"></script> 
 </body>

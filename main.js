@@ -5,6 +5,37 @@ var email = document.querySelector("#user-email");
 email.value = localStorage.getItem('user-email');
 
 /***************************
+ * Save Journal
+ ***************************/
+var saveJournal = function() {
+  console.log('IN SAVEJOURNAL FUNCTION');
+  var email = document.querySelector("#user-email");
+  var thoughts = document.querySelector("#past-thoughts-text");
+  var ponder = document.querySelector("#ponder-text");
+  var question = document.querySelector("#question-text");
+  var share = document.querySelector("#share-text");
+  var promptings = document.querySelector("#promptings-text");
+
+  var userEmail = localStorage.getItem('user-email');
+  var action = 'insert-entry';
+	
+	var jsonString = {
+                      user: userEmail,
+                      action: action,
+                      thoughts: thoughts,
+                      ponder: ponder,
+                      question: question,
+                      share: share,
+                      promptings: promptings
+                    };
+
+	var stringified = JSON.stringify(jsonString);
+	
+  //call database to insert
+  database(stringified, 'db/web_service.php');
+};
+
+/***************************
  * Check Email
  ***************************/
 function checkEmail(email) {
