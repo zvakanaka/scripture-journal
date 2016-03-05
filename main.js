@@ -97,6 +97,9 @@ function database(stringified, url) {
       	}
     	}
       //build sidebar
+      if (document.querySelector("#entries-list")) {
+        document.querySelector("#entries-list").innerHTML = '';
+      }
 	    document.getElementById('entries-heading').appendChild(makeUL(data));
 	    var j = 0;
 	     data.entry.forEach(function (entry) {
