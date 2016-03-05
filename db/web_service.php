@@ -56,11 +56,12 @@ if ($entryRow)
 
   echo $entries;
   
-  //echo "dude";
   }
 catch (Exception $ex)
 {
-  
+  $error = '{"error": "'.$ex'"}';
+  echo $error;
+  die();
 };
 //{
   //$error = '{"error": "'.$ex'"}';
