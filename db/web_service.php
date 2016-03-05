@@ -11,7 +11,7 @@ try {
 
   if ($action == "check-email") {
     $email = $cleanData["user"];
-  
+  /*
     $userCheckQuery = 'select user_id from user where email = :email';
     $userCheckStmnt = $db->prepare($userCheckQuery);
     $userCheckStmnt->bindParam(':email', $email);
@@ -23,7 +23,7 @@ try {
       //$insertUserStmnt->bindParam(':name', $user);
       $insertUserStmnt->bindParam(':email', $email);
       $insertUserStmnt->execute();
-    }
+    }*/
   
     $prize = '{"user": "'.$email.'", "journal":[';
     $prize .= '{"question":"'."variable here".'"},';
