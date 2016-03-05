@@ -59,8 +59,8 @@ if ($entryRow)
   }
 catch (Exception $ex)
 {
-  $error = '{"error": "'.$ex'"}';
-  echo $error;
+  //$error = '{"error": "'.$ex'"}';
+  //echo $error;
   die();
 };
 //{
