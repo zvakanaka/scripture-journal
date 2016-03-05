@@ -36,13 +36,12 @@ try {
     $prize .= ']}';
   
     echo $prize;
-  } else if ($action == "insert-entry") {
-  
   }
 }
 catch (Exception $ex)
 {
-  echo '{"error": "'.$ex'"}';
+  $error = '{"error": "'.$ex'"}';
+  echo $error;
   die();
 };
 
