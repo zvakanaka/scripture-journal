@@ -11,9 +11,18 @@ $action = $cleanData["action"];
 $email = $cleanData["user"];
 
 require 'load_db.php';
-/*try {
+try {
   GLOBAL $db;
-  */$db = loadDB();/*
+  $db = loadDB();
+  }
+catch (Exception $ex)
+{
+  $error = '{"error": "'.$ex'"}';
+  echo $error;
+  die();
+};
+
+die();/*
 
   if ($action == "check-email") {
     
