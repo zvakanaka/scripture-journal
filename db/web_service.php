@@ -12,7 +12,7 @@ try {
   if ($action == "check-email") {
     $email = $cleanData["user"];
   
-    $userCheckQuery = 'select name from user where email = :email';
+    $userCheckQuery = 'select user_id from user where email = :email';
     $userCheckStmnt = $db->prepare($userCheckQuery);
     $userCheckStmnt->bindParam(':email', $email);
     $userCheckStmnt->execute();
@@ -40,7 +40,7 @@ try {
 }
 catch (Exception $ex)
 {
-  echo "Error with DB. ".$ex;
+  echo '{"error": "'.$ex'"}';
   die();
 };
 

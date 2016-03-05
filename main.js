@@ -46,6 +46,9 @@ function database(stringified, url) {
     	var data = (http.responseText);
     	console.log(data);
     	data = JSON.parse(data);
+    	if (data.error) {
+    	  console.log('ERROR: '+data.error);
+    	}
     	var user = data.user;
     	console.log('Received from DB: '+user);
     	for (var i = 0; i < data.journal.length; i++) {
