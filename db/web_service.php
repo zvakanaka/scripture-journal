@@ -27,33 +27,6 @@ try {
       $insertUserStmnt->execute();
     }
   
-    $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
-    $stmnt = $db->prepare($query);
-    $stmnt->bindParam(':email', $email);
-    $stmnt->execute();
-    //TODO: maybe put this in a function so insert can update
-    $entries = '{"user": "'.$email.'", "entry":[';
-    $entryRow = $stmnt->fetch();
-    if ($entryRow)
-    {
-      while($entryRow = $stmnt->fetch())
-      {
-        $entryId = $entryRow['entry_id'];
-        $pastThought = $entryRow['past_thought'];
-         $ponderQuestion = $entryRow['ponder_question'];
-        $question = $entryRow['question'];
-        $date = $entryRow['entry_date'];
-      
-        $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
-        .'","pastThought":"'.$pastThought
-        .'","question":"'.$question
-        .'","ponderQuestion":"'.$ponderQuestion.'"},';
-      }
-    }
-    //remove trailing comma
-    $entries = rtrim($entries, ",");
-    $entries .= ']}';
-    echo $entries;//here ya go
   } else if ($action == "insert-entry") {
     $insertEntryQuery = 'insert into entry values (null, (select user_id from user where email = :email), :insertThought, :insertPonder, :insertQuestion, :insertPrompting, :insertShare, utc_date)';
     $insertEntryStmnt = $db->prepare($insertEntryQuery);
@@ -73,6 +46,34 @@ try {
     $insertEntryStmnt->execute();
     
   }
+
+  $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+  $stmnt = $db->prepare($query);
+  $stmnt->bindParam(':email', $email);
+  $stmnt->execute();
+  //TODO: maybe put this in a function so insert can update
+  $entries = '{"user": "'.$email.'", "entry":[';
+  $entryRow = $stmnt->fetch();
+  if ($entryRow)
+  {
+    while($entryRow = $stmnt->fetch())
+    {
+      $entryId = $entryRow['entry_id'];
+      $pastThought = $entryRow['past_thought'];
+       $ponderQuestion = $entryRow['ponder_question'];
+      $question = $entryRow['question'];
+      $date = $entryRow['entry_date'];
+    //TODO: add share and others
+      $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+      .'","pastThought":"'.$pastThought
+      .'","question":"'.$question
+      .'","ponderQuestion":"'.$ponderQuestion.'"},';
+    }
+  }
+  //remove trailing comma
+  $entries = rtrim($entries, ",");
+  $entries .= ']}';
+  echo $entries;//here ya go
 }
 catch (Exception $ex)
 {
