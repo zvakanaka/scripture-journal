@@ -87,6 +87,7 @@ function database(stringified, url) {
       	}
     	}
       //build sidebar
+	    document.querySelector("#entries-list").innerHTML = '';
 	    document.getElementById('entries-heading').appendChild(makeUL(data));
     }
   };
@@ -117,7 +118,7 @@ function countWords(idOfBox, numWordsRequired) {
 function makeUL(data) {
     // create list element
     var list = document.createElement('ul');
-	  //list.setAttribute("class", "nav-ul");
+	  list.setAttribute("id", "entries-list");
 
     for(var i = 0; i < data.entry.length; i++) {
         var question = data.entry[i].question;
