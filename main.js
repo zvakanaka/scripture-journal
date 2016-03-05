@@ -142,7 +142,7 @@ function makeUL(data) {
         //item.setAttribute("title", arr.nav[i].text);
 
     		var a = document.createElement('a');
-    		a.setAttribute("onclick", 'populateEntryForm(data.entry[i])');
+    		a.setAttribute("onclick", function(){populateEntryForm(data.entry[i]);});
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:
