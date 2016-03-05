@@ -32,6 +32,15 @@ var saveJournal = function() {
   database(stringified, 'db/web_service.php');
 };
 
+function populateEntryForm(entry) {
+  console.log('POPULATE ENTRY');
+  document.querySelector("#past-thoughts-text").value = entry.pastThought;
+  document.querySelector("#ponder-question-text").value = entry.ponderQuestion;
+  document.querySelector("#question-text").value = entry.question;
+  document.querySelector("#share-text").value = entry.share;
+  document.querySelector("#promptings-text").value = entry.promptings;
+}
+
 /***************************
  * Check Email
  ***************************/
@@ -59,6 +68,7 @@ var checkEmail = function(email) {
 };
 
 /***************************
+ * DATABASE
  * Upload or pull journal data
  * depending on json
  ***************************/
@@ -88,6 +98,13 @@ function database(stringified, url) {
     	}
       //build sidebar
 	    document.getElementById('entries-heading').appendChild(makeUL(data));
+	    var j = 0;
+	     data.entry.forEach(function (entry) {
+	       document.getElementById('entry-li-' + j).onclick = function () {
+			      populateEntryForm(entry);
+		      };
+		      j++;
+	      });
     }
   };
   http.send(stringified);
@@ -114,16 +131,6 @@ function countWords(idOfBox, numWordsRequired) {
   }
 }
 
-function populateEntryForm() {
-  var entry = uniEntry;
-  console.log('POPULATE ENTRY');
-  document.querySelector("#past-thoughts-text").value = entry.pastThought;
-  document.querySelector("#ponder-question-text").value = entry.ponderQuestion;
-  document.querySelector("#question-text").value = entry.question;
-  document.querySelector("#share-text").value = entry.share;
-  document.querySelector("#promptings-text").value = entry.promptings;
-}
-
 function makeUL(data) {
   //TODO: erase list of past users
   	//if (document.querySelector("#entries-list").innerHTML !== null) {
@@ -143,8 +150,8 @@ function makeUL(data) {
         //item.setAttribute("title", arr.nav[i].text);
 
     		var a = document.createElement('a');
-    	  uniEntry = data.entry[i];
-    		a.setAttribute("onclick", populateEntryForm);
+
+    		a.setAttribute("id", "entry-li-"+i);
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:
@@ -153,6 +160,7 @@ function makeUL(data) {
         // add li to list
         list.appendChild(item);
     }
+
     return list;
 }
 
