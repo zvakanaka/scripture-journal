@@ -7,8 +7,8 @@ if ($cleanData["action"] == "check-email") {
   $user = $cleanData["user"];
   $prize = '{"user": "'.$user.'", "journal":[';
   $prize .= '{"question":"'."variable here".'"},';
-   //remove trailing comma
-  //$prize = rtrim($prize, ",");
+  //remove trailing comma
+  $prize = rtrim($prize, ",");
   $prize .= ']}';
 
   echo $prize;
