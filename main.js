@@ -49,7 +49,7 @@ function database(stringified, url) {
     	var user = data.user;
     	console.log('Received from DB: '+user);
     	for (var i = 0; i < data.journal.length; i++) {
-			  var question = data.question[i];
+			  var question = data.journal[i].question;
     	}
     }
   };
