@@ -1,7 +1,7 @@
 <?php
-ini_set("log_errors", 1);
-ini_set("error_log", "/tmp/php-error.log");
-error_log( "Web service!" );
+//ini_set("log_errors", 1);
+// ini_set("error_log", "/tmp/php-error.log");
+// error_log( "Web service!" );
 
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
@@ -53,8 +53,8 @@ try {
   $entries .= ']}';
 
   echo $entries;
-  
-    */$prize = '{"user": "'.$email.'", "journal":[';
+  */echo "dude";
+  /*$prize = '{"user": "'.$email.'", "journal":[';
     $prize .= '{"question":"'."variable here".'"},';
     //remove trailing comma
     $prize = rtrim($prize, ",");
