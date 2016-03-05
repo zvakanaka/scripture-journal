@@ -46,7 +46,7 @@ function database(stringified, url) {
     	var data = (http.responseText);
     	console.log(data);
     	data = JSON.parse(data);
-    	if (data.error.length > 0) {
+    	if (data.error !== undefined) {
     	  console.log('ERROR: '+data.error);
     	} else{
       	var user = data.user;
