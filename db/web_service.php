@@ -22,8 +22,7 @@ catch (Exception $ex)
   echo $error;
   die();
 };
-
-die();/*
+/*
 
   if ($action == "check-email") {
     
