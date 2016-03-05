@@ -9,14 +9,14 @@ email.value = localStorage.getItem('user-email');
  ***************************/
 var saveJournal = function() {
   console.log('IN SAVEJOURNAL FUNCTION');
-  var email = document.querySelector("#user-email");
-  var thoughts = document.querySelector("#past-thoughts-text");
-  var ponder = document.querySelector("#ponder-text");
-  var question = document.querySelector("#question-text");
-  var share = document.querySelector("#share-text");
-  var promptings = document.querySelector("#promptings-text");
+  var email = document.querySelector("#user-email").value;
+  var thoughts = document.querySelector("#past-thoughts-text").value;
+  var ponder = document.querySelector("#ponder-text").value;
+  var question = document.querySelector("#question-text").value;
+  var share = document.querySelector("#share-text").value;
+  var promptings = document.querySelector("#promptings-text").value;
 
-  var userEmail = localStorage.getItem('user-email');
+  var userEmail = localStorage.getItem('user-email');//what
   var action = 'insert-entry';
 	
 	var jsonString = {
