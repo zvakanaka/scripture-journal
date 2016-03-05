@@ -11,7 +11,7 @@ var saveJournal = function() {
   console.log('IN SAVEJOURNAL FUNCTION');
   var email = document.querySelector("#user-email").value;
   var thoughts = document.querySelector("#past-thoughts-text").value;
-  var ponder = document.querySelector("#ponder-text").value;
+  var ponder = document.querySelector("#ponder-question-text").value;
   var question = document.querySelector("#question-text").value;
   var share = document.querySelector("#share-text").value;
   var promptings = document.querySelector("#promptings-text").value;
