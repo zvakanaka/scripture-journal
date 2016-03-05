@@ -33,7 +33,7 @@ try {
     $stmnt->execute();
 
 $entries = '{"user": "'.$email.'", "entry":[';
-  while($row = $stmnt->fetch())
+ /* while($row = $stmnt->fetch())
   {
     $entryId = $row['entry_id'];
     $pastThought = $row['past_thought'];
@@ -44,7 +44,7 @@ $entries = '{"user": "'.$email.'", "entry":[';
     .'","pastThought":"'.$pastThought
     .'","question":"'.$question
     .'","ponderQuestion":"'.$ponderQuestion.'"},';
-  }
+  }*/
   //remove trailing comma
   $entries = rtrim($entries, ",");
   $entries .= ']}';
