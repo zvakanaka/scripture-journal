@@ -26,37 +26,37 @@ try {
       $insertUserStmnt->bindParam(':email', $email);
       $insertUserStmnt->execute();
     }
-  }
-  $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+  
+    $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
     $stmnt = $db->prepare($query);
     $stmnt->bindParam(':email', $email);
     $stmnt->execute();
-
-$entries = '{"user": "'.$email.'", "entry":[';
-$entryRow = $stmnt->fetch();
-if ($entryRow)
-{
- while($entryRow = $stmnt->fetch())
-  {
-    $entryId = $entryRow['entry_id'];
-    $pastThought = $entryRow['past_thought'];
-     $ponderQuestion = $entryRow['ponder_question'];
-    $question = $entryRow['question'];
-    $date = $entryRow['entry_date'];
+    
+    $entries = '{"user": "'.$email.'", "entry":[';
+    $entryRow = $stmnt->fetch();
+    if ($entryRow)
+    {
+      while($entryRow = $stmnt->fetch())
+      {
+        $entryId = $entryRow['entry_id'];
+        $pastThought = $entryRow['past_thought'];
+         $ponderQuestion = $entryRow['ponder_question'];
+        $question = $entryRow['question'];
+        $date = $entryRow['entry_date'];
+      
+        $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+        .'","pastThought":"'.$pastThought
+        .'","question":"'.$question
+        .'","ponderQuestion":"'.$ponderQuestion.'"},';
+      }
+    }
+    //remove trailing comma
+    $entries = rtrim($entries, ",");
+    $entries .= ']}';
   
-    $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
-    .'","pastThought":"'.$pastThought
-    .'","question":"'.$question
-    .'","ponderQuestion":"'.$ponderQuestion.'"},';
+    echo $entries;
   }
 }
-  //remove trailing comma
-  $entries = rtrim($entries, ",");
-  $entries .= ']}';
-
-  echo $entries;
-  
-  }
 catch (Exception $ex)
 {
   //$error = '{"error": "'.$ex'"}';
