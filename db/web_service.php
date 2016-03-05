@@ -13,8 +13,9 @@ try {
   GLOBAL $db;
   $db = loadDB();
 
+  $email = $cleanData["user"];
+
   if ($action == "check-email") {
-    $email = $cleanData["user"];
     
     $userCheckQuery = 'select user_id from user where email = :email';
     $userCheckStmnt = $db->prepare($userCheckQuery);
@@ -28,20 +29,47 @@ try {
       $insertUserStmnt->bindParam(':email', $email);
       $insertUserStmnt->execute();
     }
+    
+    $query = 'select * from entry where user_id = (select user_id from user where email = :email)'; 
+    $stmnt = $db->prepare($query);
+    $stmnt->bindParam(':email', $email);
+    $stmnt->execute();
+
+  $entries = '{"email": "'.$email.'", "entry":[';
+  while($row = $stmnt->fetch())
+  {
+    $entryId = $row['entry_id'];
+    $pastThought = $row['past_thought'];
+    $ponderQuestion = $row['ponder_question'];
+    $question = $row['question']);
+    $date = $row['entry_date']);
+    $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+    .'","pastThought":"'.$pastThought
+    .'","question":"'.$question
+    .'","ponderQuestion":"'.$ponderQuestion.'"},';
+  }
+  //remove trailing comma
+  $entries = rtrim($entries, ",");
+  $entries .= ']}';
+
+  echo $entries;
   
+    /*$prize = '{"user": "'.$email.'", "journal":[';
+    $prize .= '{"question":"'."variable here".'"},';
+    //remove trailing comma
+    $prize = rtrim($prize, ",");
+    $prize .= ']}';
+    echo $prize;*/
+    
+  } else if ($action == "insert-entry") {
+    
+    
     $prize = '{"user": "'.$email.'", "journal":[';
     $prize .= '{"question":"'."variable here".'"},';
     //remove trailing comma
     $prize = rtrim($prize, ",");
     $prize .= ']}';
-    
-/*        $prize = '{"user": "'.$email.'", "journal":[';
-    $prize .= '{"question":"'."variable here".'"},';
-    //remove trailing comma
-    $prize = rtrim($prize, ",");
-    $prize .= ']}';*/
-  
-    echo $prize;
+
   }
 }
 catch (Exception $ex)
