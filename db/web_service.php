@@ -12,7 +12,7 @@ $email = $cleanData["user"];
 
 require 'load_db.php';
 try {
-  //GLOBAL $db;
+  GLOBAL $db;
   $db = loadDB();
   echo "dude";
   }
