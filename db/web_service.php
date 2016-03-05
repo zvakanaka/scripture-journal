@@ -1,4 +1,8 @@
 <?php
+ini_set("log_errors", 1);
+ini_set("error_log", "/tmp/php-error.log");
+error_log( "Hello, errors!" );
+
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
 
