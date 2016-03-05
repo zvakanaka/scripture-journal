@@ -11,9 +11,9 @@ $action = $cleanData["action"];
 $email = $cleanData["user"];
 
 require 'load_db.php';
-//try {
+/*try {
   GLOBAL $db;
-  $db = loadDB();
+  */$db = loadDB();/*
 
   if ($action == "check-email") {
     
@@ -25,7 +25,6 @@ require 'load_db.php';
     if (!$row) {
       $insertUserQuery = 'insert into user values(null, :email, null)';
       $insertUserStmnt = $db->prepare($insertUserQuery);
-      //$insertUserStmnt->bindParam(':name', $user);
       $insertUserStmnt->bindParam(':email', $email);
       $insertUserStmnt->execute();
     }
@@ -68,7 +67,7 @@ catch (Exception $ex)
   $error = '{"error": "'.$ex'"}';
   echo $error;
   die();
-};
+};*/
 
-die();*/
+die();
 ?>
