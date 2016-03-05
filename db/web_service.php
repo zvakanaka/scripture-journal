@@ -33,18 +33,19 @@ try {
     $stmnt->execute();
 
 $entries = '{"user": "'.$email.'", "entry":[';
- while($entryRow = $stmnt->fetch())
+$entryRow = $stmnt->fetch();
+/* while($entryRow = $stmnt->fetch())
   {
     $entryId = $entryRow['entry_id'];
     $pastThought = $entryRow['past_thought'];
     $ponderQuestion = $entryRow['ponder_question'];
     $question = $entryRow['question']);
     $date = $entryRow['entry_date']);
-    /*$entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+    $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
     .'","pastThought":"'.$pastThought
     .'","question":"'.$question
-    .'","ponderQuestion":"'.$ponderQuestion.'"},';*/
-  }
+    .'","ponderQuestion":"'.$ponderQuestion.'"},';
+  }*/
   //remove trailing comma
   $entries = rtrim($entries, ",");
   $entries .= ']}';
