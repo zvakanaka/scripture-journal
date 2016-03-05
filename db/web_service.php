@@ -2,17 +2,21 @@
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
 
-$date = $cleanData["year"]."-".($cleanData["month"]+1)."-";
-if ($cleanData["day"] < 10) {
-  $date .= "0"; 
+$action = $cleanData["action"];
+if ($cleanData["action"] == "check-email") {
+  $user = $cleanData["user"];
+  $prize = '{"user": "'.$user.'", "journal":[';
+  $prize .= '{"question":"'."variable here".'"},';
+   //remove trailing comma
+  //$prize = rtrim($prize, ",");
+  $prize .= ']}';
+
+  echo $prize;
 }
-$date .= $cleanData["day"];
-$user = $cleanData["user"];
-$email = $cleanData["email"];
 
 //decide whether to insert. alternatively select only
 $shouldInsert = $cleanData["hours"];
-
+/*
 if ($shouldInsert) {
   $hours = $cleanData["hours"];
   $appointLocation = $cleanData["location"];
@@ -83,5 +87,5 @@ catch (Exception $ex)
   die();
 };
 
-die();
+die();*/
 ?>

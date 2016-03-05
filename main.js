@@ -1,17 +1,35 @@
 var element = document.querySelector("#greeting");
 element.innerText = "Scripture Journal";
 
+var email = document.querySelector("#user-email");
+email.value = localStorage.getItem('user-email');
+
 /***************************
  * Check Email
  ***************************/
 function checkEmail(email) {
-  console.log('Email is '+email.value);
+  localStorage.setItem('user-email', email.value);
+  console.log('Email is ' + email.value);
+  
   //TODO: call database to check email
   var emailConfirm = document.querySelector("#"+email.getAttribute('id')+"-confirm");
   emailConfirm.className = "label label-success";
   emailConfirm.innerHTML = 'Email Found';
   emailConfirm.className = "label label-danger";
   emailConfirm.innerHTML = 'Invalid email';
+  
+  var userEmail = localStorage.getItem('user-email');
+  var action = 'check-email';
+	
+	var jsonString = {
+                      user: userEmail,
+                      action: action
+                    };
+
+	var stringified = JSON.stringify(jsonString);
+	
+  //call database to insert
+  database(stringified, 'db/web_service.php');
 }
 
 /***************************
@@ -59,6 +77,7 @@ function countWords(idOfBox, numWordsRequired) {
 
 /***************************
  * COPY
+ * Taken from http://www.sitepoint.com/javascript-copy-to-clipboard/
  ***************************/
 (function() {
 
