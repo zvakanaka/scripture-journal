@@ -30,7 +30,7 @@ try {
       $insertUserStmnt->execute();
     }
     
-    $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+/*    $query = 'select entry_id, past_thought, ponder_question, question, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
     $stmnt = $db->prepare($query);
     $stmnt->bindParam(':email', $email);
     $stmnt->execute();
@@ -54,12 +54,12 @@ try {
 
   echo $entries;
   
-    /*$prize = '{"user": "'.$email.'", "journal":[';
+    */$prize = '{"user": "'.$email.'", "journal":[';
     $prize .= '{"question":"'."variable here".'"},';
     //remove trailing comma
     $prize = rtrim($prize, ",");
     $prize .= ']}';
-    echo $prize;*/
+    echo $prize;//*/
     
   } else if ($action == "insert-entry") {
     
