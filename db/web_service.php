@@ -12,8 +12,9 @@ $email = $cleanData["user"];
 
 require 'load_db.php';
 try {
-  GLOBAL $db;
+  //GLOBAL $db;
   $db = loadDB();
+  echo "dude";
   }
 catch (Exception $ex)
 {
@@ -61,7 +62,7 @@ die();/*
   $entries .= ']}';
 
   echo $entries;
-  */echo "dude";
+  */
   /*$prize = '{"user": "'.$email.'", "journal":[';
     $prize .= '{"question":"'."variable here".'"},';
     //remove trailing comma
