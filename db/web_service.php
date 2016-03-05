@@ -41,17 +41,13 @@ if ($entryRow)
     $entryId = $entryRow['entry_id'];
     $pastThought = $entryRow['past_thought'];
      $ponderQuestion = $entryRow['ponder_question'];
-    $question = $entryRow['question']);
-    $date = $entryRow['entry_date']);
-   /* $entryId = $entryRow['entry_id'];
-    $pastThought = $entryRow['past_thought'];
-    $ponderQuestion = $entryRow['ponder_question'];
-    $question = $entryRow['question']);
-    $date = $entryRow['entry_date']);
+    $question = $entryRow['question'];
+    $date = $entryRow['entry_date'];
+  
     $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
     .'","pastThought":"'.$pastThought
     .'","question":"'.$question
-    .'","ponderQuestion":"'.$ponderQuestion.'"},';*/
+    .'","ponderQuestion":"'.$ponderQuestion.'"},';
   }
 }
   //remove trailing comma
