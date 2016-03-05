@@ -1,4 +1,4 @@
-<?php
+  <?php
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
 error_log( "Web service!" );
@@ -15,9 +15,8 @@ try {
   GLOBAL $db;
   $db = loadDB();
   if ($action == "check-email") {
-    
-  echo $db;
-    }
+    $userCheckQuery = 'select user_id from user where email = :email';
+  }
   echo "dude";
   }
 catch (Exception $ex)
