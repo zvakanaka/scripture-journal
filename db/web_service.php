@@ -11,7 +11,7 @@ $action = $cleanData["action"];
 require 'load_db.php';
 //try {
   //GLOBAL $db;
-  //$db = loadDB();
+  $db = loadDB();
 
   if ($action == "check-email") {
     $email = $cleanData["user"];
