@@ -14,8 +14,19 @@ require 'load_db.php';
 try {
   GLOBAL $db;
   $db = loadDB();
-
-  echo "dude";
+if ($action == "check-email") {
+    
+    $userCheckQuery = 'select user_id from user where email = :email';
+    $userCheckStmnt = $db->prepare($userCheckQuery);
+    $userCheckStmnt->bindParam(':email', $email);
+    $userCheckStmnt->execute();
+    $row = $userCheckStmnt->fetch();
+    if (!$row) {
+      $insertUserQuery = 'insert into user values(null, :email, null)';
+      $insertUserStmnt = $db->prepare($insertUserQuery);
+      $insertUserStmnt->bindParam(':email', $email);
+      $insertUserStmnt->execute();
+    }
   }
 catch (Exception $ex)
 {
