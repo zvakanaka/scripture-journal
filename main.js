@@ -3,6 +3,7 @@ element.innerText = "Scripture Journal";
 var uniEntry;
 
 //To handle newlines and the like in JSON
+//TODO: this should really be happening on the PHP side... security
 function jsonEscape(str)  {
     return str.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
 }
@@ -37,6 +38,7 @@ var saveJournal = function() {
   database(stringified, 'db/web_service.php');
 };
 
+//When a sidebar entry is clicked on, load it up
 function populateEntryForm(entry) {
   console.log('POPULATE ENTRY');
   document.querySelector("#past-thoughts-text").value = entry.pastThought;
@@ -62,7 +64,7 @@ var checkEmail = function(email) {
   var action = 'check-email';
 	
 	var jsonString = {
-                      user: userEmail,
+                      user: jsonEscape(userEmail),
                       action: action
                     };
 
@@ -175,44 +177,3 @@ email.value = localStorage.getItem('user-email');
 if (email.value !== '') {
   checkEmail(email);
 }
-
-/***************************
- * COPY
- * Taken from http://www.sitepoint.com/javascript-copy-to-clipboard/
- ***************************/
-(function() {
-
-  'use strict';
-
-  // click events
-  document.body.addEventListener('click', copy, true);
-
-  // event handler
-  function copy(e) {
-
-    // find target element
-    var
-      t = e.target,
-      c = t.dataset.copytarget,
-      inp = (c ? document.querySelector(c) : null);
-
-    // is element selectable?
-    if (inp && inp.select) {
-
-      // select text
-      inp.select();
-
-      try {
-        // copy text
-        document.execCommand('copy');
-        inp.blur();
-      }
-      catch (err) {
-        alert('please press Ctrl/Cmd+C to copy');
-      }
-
-    }
-
-  }
-
-})();
