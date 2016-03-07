@@ -1,11 +1,16 @@
 var element = document.querySelector("#greeting");
 element.innerText = "Scripture Journal";
 var uniEntry;
+
+//To handle newlines and the like in JSON
+function jsonEscape(str)  {
+    return str.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
+}
+
 /***************************
  * Save Journal
  ***************************/
 var saveJournal = function() {
-  console.log('IN SAVEJOURNAL FUNCTION');
   var email = document.querySelector("#user-email").value;
   var thoughts = document.querySelector("#past-thoughts-text").value;
   var ponder = document.querySelector("#ponder-question-text").value;
@@ -13,17 +18,17 @@ var saveJournal = function() {
   var share = document.querySelector("#share-text").value;
   var promptings = document.querySelector("#promptings-text").value;
 
-  var userEmail = localStorage.getItem('user-email');//what
+  var userEmail = localStorage.getItem('user-email');
   var action = 'insert-entry';
 	
 	var jsonString = {
-                      user: userEmail,
-                      action: action,
-                      thoughts: thoughts,
-                      ponder: ponder,
-                      question: question,
-                      share: share,
-                      promptings: promptings
+                      user: jsonEscape(userEmail),
+                      action: jsonEscape(action),
+                      thoughts: jsonEscape(thoughts),
+                      ponder: jsonEscape(ponder),
+                      question: jsonEscape(question),
+                      share: jsonEscape(share),
+                      promptings: jsonEscape(promptings)
                     };
 
 	var stringified = JSON.stringify(jsonString);
