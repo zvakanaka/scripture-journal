@@ -96,16 +96,12 @@ function database(stringified, url) {
         emailConfirm.innerHTML = 'Email Found';
         
       	console.log('Received from DB: '+user);
-      	for (var i = 0; i < data.entry.length; i++) {
-  			  var question = data.entry[i].question;
-  			  console.log('Question: '+question);
-      	}
     	}
       //build sidebar
       if (document.querySelector("#entries-list")) {
         document.querySelector("#entries-list").innerHTML = '';
       }
-	    document.getElementById('entries-heading').appendChild(makeUL(data));
+	    document.getElementById('entries-list').appendChild(makeUL(data));
 	    var j = 0;
 	     data.entry.forEach(function (entry) {
 	       document.getElementById('entry-li-' + j).onclick = function () {
