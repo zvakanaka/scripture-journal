@@ -93,9 +93,12 @@ function database(stringified, url) {
     	  console.log('ERROR: '+data.error);
     	} else {                 //all is well
       	var user = data.user;
+      	
       	var emailConfirm = document.querySelector("#user-email-confirm");
         emailConfirm.className = "label label-success";
         emailConfirm.innerHTML = 'Email Found';
+        var submitButton = document.querySelector("#submit-button");
+        submitButton.className = "pure-button";//this removes the disabled
         
       	console.log('Received from DB: '+user);
     	}
@@ -146,20 +149,21 @@ function makeUL(data) {
     // create list element
     var list = document.createElement('ul');
 	  list.setAttribute("id", "entries-list");
-    list.setAttribute("class", "list-group");
+    list.setAttribute("class", "pure-menu-list");
     
     for(var i = 0; i < data.entry.length; i++) {
         var question = data.entry[i].question;
   			console.log('Question: '+question);
         // create li element
         var item = document.createElement('li');
+        item.setAttribute("class", "pure-menu-item");
         //TODO: put this in the JSON 
         //item.setAttribute("title", arr.nav[i].text);
 
     		var a = document.createElement('a');
 
     		a.setAttribute("id", "entry-li-"+i);
-    		a.setAttribute("class", "list-group-item");
+    		a.setAttribute("class", "pure-menu-link");
     		a.appendChild(document.createTextNode(data.entry[i].date));
 
         // set li contents:

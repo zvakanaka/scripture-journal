@@ -4,14 +4,16 @@
 <head>
   <title>scripture-journal</title>
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="styles.css">
   
 </head>
 
 <body>
-<div id="aside">
+<div id="aside" class="pure-menu pure-menu-scrollable custom-restricted">
   <h2 id="entries-heading">Entries</h2>
   <div id="entries-list"></div>
 
@@ -20,9 +22,9 @@
 <div id="main-column">
   <div id="greeting"></div>
 
-  <form id="schedule_form" action="#" method="POST" enctype="multipart/form-data">
-    <label>Email</label>
-    <input name="email" type="email" id="user-email" onChange="checkEmail(this);"/> 
+  <form id="schedule_form" action="#" method="POST" enctype="multipart/form-data" class="pure-form pure-form-aligned">
+    <label for="user-email">Email</label>
+        <input id="user-email" type="email" onChange="checkEmail(this);" placeholder="Email">
     <span id="user-email-confirm" class="hidden"></span>
       
     <h2 id="past-thoughts-title" title="Study Journal: In 100 words or more, write about something you learned from doing the reading assignment OR something that really struck you from class.  Remember that the reading you are reporting on is from the PREVIOUS class.  You may share insights you gained, questions you have, stories about principles you have studied. ">
@@ -46,7 +48,7 @@
     <textarea name="share" id="share-text" class="thoughts" name="message" rows="7" cols="30"></textarea>
       <p id="share-text-counter"></p>
       
-    <input id="submit_button" onclick="saveJournal();event.preventDefault();" type="button" value="Save in Journal">
+    <input id="submit-button" onclick="saveJournal();event.preventDefault();" type="button" value="Save in Journal" class="pure-button pure-button-disabled">
   </form>
 </div>
   
