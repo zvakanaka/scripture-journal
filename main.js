@@ -1,6 +1,5 @@
 var element = document.querySelector("#greeting");
 element.innerText = "Scripture Journal";
-var uniEntry;
 
 //To handle newlines and the like in JSON
 //TODO: this should really be happening on the PHP side... security
@@ -57,7 +56,7 @@ var checkEmail = function(email) {
   
   //call database to check email later
   var emailConfirm = document.querySelector("#user-email-confirm");
-  emailConfirm.className = "label label-danger";
+  emailConfirm.className = "button-error pure-button";
   emailConfirm.innerHTML = 'Invalid email';
   
   var userEmail = localStorage.getItem('user-email');
@@ -95,7 +94,7 @@ function database(stringified, url) {
       	var user = data.user;
       	
       	var emailConfirm = document.querySelector("#user-email-confirm");
-        emailConfirm.className = "label label-success";
+        emailConfirm.className = "button-success pure-button";
         emailConfirm.innerHTML = 'Email Found';
         var submitButton = document.querySelector("#submit-button");
         submitButton.className = "pure-button";//this removes the disabled
@@ -138,6 +137,8 @@ function countWords(idOfBox, numWordsRequired) {
   if (words >= numWordsRequired) {  
     counter.style.color = 'green';
   }
+  var submitButton = document.querySelector("#submit-button");
+  submitButton.className = "pure-button";//this removes the disabled
 }
 
 function makeUL(data) {
