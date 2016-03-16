@@ -10,7 +10,7 @@ PRIMARY KEY (user_id)
 );
 
 -- -----------------------------------------------------
--- Table `journal`.`entry`
+-- Table `journal`.`entry` Created by Olu Egunjobi
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `journal`.`entry` (
   `journal_id` INT NOT NULL AUTO_INCREMENT,
@@ -22,3 +22,12 @@ CREATE TABLE IF NOT EXISTS `journal`.`entry` (
   `sharing` LONGTEXT NULL,
   PRIMARY KEY (`journal_id`))
 ENGINE = InnoDB;
+
+-- The following statement will delete and entry if you think it is corrupt
+-- delete from entry where entry_id = 25;
+
+-- The following will escape double quotes
+-- UPDATE entry SET question = REPLACE(question, '"', '\\"') where entry_id = 26;
+-- The following will escape single quotes
+-- UPDATE entry SET question = REPLACE(question, "'", "\\'") where entry_id = 26;
+
