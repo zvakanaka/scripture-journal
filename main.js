@@ -40,11 +40,20 @@ var saveJournal = function() {
 //When a sidebar entry is clicked on, load it up
 function populateEntryForm(entry) {
   console.log('POPULATE ENTRY');
-  document.querySelector("#past-thoughts-text").value = entry.pastThought;
-  document.querySelector("#ponder-question-text").value = entry.ponderQuestion;
-  document.querySelector("#question-text").value = entry.question;
-  document.querySelector("#share-text").value = entry.share;
-  document.querySelector("#promptings-text").value = entry.promptings;
+  //TODO: Call db with user_id and email JSON and get-entry-details action
+   var userEmail = localStorage.getItem('user-email');
+  var action = 'get-entry-details';
+	
+	var jsonString = {
+                      user: jsonEscape(userEmail),
+                      action: action,
+                      entryId: entryId
+                    };
+
+	var stringified = JSON.stringify(jsonString);
+	
+  //call database to grab
+  getEntryDetails(stringified, 'db/web_service.php');
 }
 
 /***************************
@@ -101,7 +110,8 @@ function database(stringified, url) {
         
       	console.log('Received from DB: '+user);
     	}
-      //build sidebar
+    	
+      //tear-down and build sidebar
       if (document.querySelector("#entries-list")) {
         document.querySelector("#entries-list").innerHTML = '';
       }
@@ -113,6 +123,38 @@ function database(stringified, url) {
 		      };
 		      j++;
 	      });
+    }
+  };
+  http.send(stringified);
+}
+
+/***************************
+ * GET ENTRY DETAILS
+ * from database
+ ***************************/
+function getEntryDetails(stringified, url) {
+  var http = new XMLHttpRequest(); 
+  http.open("POST", url, true);
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  http.onreadystatechange = function() {
+    if (http.readyState == 4 && http.status == 200) {
+    	//response
+    	var data = (http.responseText);
+    	console.log(data);
+    	data = JSON.parse(data);
+    	if (data.error !== undefined) {
+    	  console.log('ERROR: ' + data.error);
+    	} else {                 //all is well
+      	var user = data.user;
+      	  
+        document.querySelector("#past-thoughts-text").value = data.pastThought;
+        document.querySelector("#ponder-question-text").value = data.ponderQuestion;
+        document.querySelector("#question-text").value = data.question;
+        document.querySelector("#share-text").value = data.share;
+        document.querySelector("#promptings-text").value = data.promptings;
+  
+      	console.log('Received from DB: '+user);
+    	}
     }
   };
   http.send(stringified);

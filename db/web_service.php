@@ -21,7 +21,8 @@ try {
     $userCheckStmnt = $db->prepare($userCheckQuery);
     $userCheckStmnt->bindParam(':email', $email);
     $userCheckStmnt->execute();
-     $row = $userCheckStmnt->fetch();
+    
+    $row = $userCheckStmnt->fetch();
     if (!$row) {
       $insertUserQuery = 'insert into user values(null, :email, null)';
       $insertUserStmnt = $db->prepare($insertUserQuery);
@@ -47,34 +48,54 @@ try {
     $insertEntryStmnt->bindParam(':insertShare', $insertShare);
     $insertEntryStmnt->execute();
     
+  } else if ($action == "get-entry-details") {
+      $entryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
+      $getEntryStmnt = $db->prepare($entryQuery);
+      $getEntryStmnt->bindParam(':email', $email);
+      $entryId = $cleanData["entryId"];
+      $getEntryStmnt->bindParam(':entry_id', $entryId);
+      $getEntryStmnt->execute();
+      //TODO: maybe put this in a function so insert can update
+      $entries = '{"user": "'.$email.'", "entry":[';
+      $entryRow = $getEntryStmnt->fetch();
+      if ($entryRow)
+      {
+          $entryId = $entryRow['entry_id'];
+          $pastThought = $entryRow['past_thought'];
+          $ponderQuestion = $entryRow['ponder_question'];
+          $question = $entryRow['question'];
+          $share = $entryRow['sharing'];
+          $prompting = $entryRow['prompting'];
+          $date = $entryRow['entry_date'];
+          
+          $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
+          .'","pastThought":"'.$pastThought
+          .'","question":"'.$question
+          .'","share":"'.$share
+          .'","promptings":"'.$prompting
+          .'","ponderQuestion":"'.$ponderQuestion.'"},';
+      }
+      //remove trailing comma
+      $entries = rtrim($entries, ",");
+      $entries .= ']}';
+      echo $entries;//here ya go
   }
 
-  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+  $query = 'select entry_id, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
   $stmnt = $db->prepare($query);
   $stmnt->bindParam(':email', $email);
   $stmnt->execute();
   //TODO: maybe put this in a function so insert can update
   $entries = '{"user": "'.$email.'", "entry":[';
-  $entryRow = $stmnt->fetch();
+  $entryRow = $stmnt->fetch();//NOTE: is this line overwritten in the loop
   if ($entryRow)
   {
     while($entryRow = $stmnt->fetch())
     {
       $entryId = $entryRow['entry_id'];
-      $pastThought = $entryRow['past_thought'];
-      $ponderQuestion = $entryRow['ponder_question'];
-      $question = $entryRow['question'];
-      $share = $entryRow['sharing'];
-      $prompting = $entryRow['prompting'];
       $date = $entryRow['entry_date'];
       
-    //TODO: add share and others
-      $entries .= '{"date":"'.$date.'","entryId":"'.$entryId
-      .'","pastThought":"'.$pastThought
-      .'","question":"'.$question
-      .'","share":"'.$share
-      .'","promptings":"'.$prompting
-      .'","ponderQuestion":"'.$ponderQuestion.'"},';
+      $entries .= '{"date":"'.$date.'","entryId":"'.$entryId.'"},';
     }
   }
   //remove trailing comma
