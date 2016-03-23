@@ -49,7 +49,7 @@ try {
     
   }
 
-  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) order by entry_date DESC'; 
+  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) order by entry_id DESC'; 
   $stmnt = $db->prepare($query);
   $stmnt->bindParam(':email', $email);
   $stmnt->execute();
