@@ -89,7 +89,7 @@ function database(stringified, url) {
     	console.log(data);
     	data = JSON.parse(data);
     	if (data.error !== undefined) {
-    	  console.log('ERROR: '+data.error);
+    	  console.log('ERROR: ' + data.error);
     	} else {                 //all is well
       	var user = data.user;
       	

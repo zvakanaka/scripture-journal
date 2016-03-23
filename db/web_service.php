@@ -1,8 +1,10 @@
 <?php
+// To see errors in console:
+// tail -f /tmp/php-error.log
 ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
 error_log( "Web service!" );
-// echo "Im an ambadextrious omnivore";
+
 $postedData = $HTTP_RAW_POST_DATA;
 $cleanData = json_decode($postedData, true);
 
@@ -47,7 +49,7 @@ try {
     
   }
 
-  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+  $query = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) order by entry_date DESC'; 
   $stmnt = $db->prepare($query);
   $stmnt->bindParam(':email', $email);
   $stmnt->execute();
