@@ -54,7 +54,7 @@ try {
       $getEntryStmnt->bindParam(':email', $email);
       $getEntryStmnt->bindParam(':entry_id', $cleanData["entryId"]);
       $getEntryStmnt->execute();
-      //TODO: maybe put this in a function so insert can update
+
       $detailedEntries = '{"user": "'.$email.'",';
       $getEntryRow = $getEntryStmnt->fetch();
       if ($getEntryRow)
@@ -75,7 +75,7 @@ try {
           .'","ponderQuestion":"'.$ponderQuestion.'"';
       }
       else {
-        $detailedEntries .= '"error":"error"';
+        $detailedEntries .= '"error":"ENTRY_ID '.$cleanData["entryId"].' NOT FOUND"';
       }
       $detailedEntries .= '}';
       echo $detailedEntries;//here ya go
