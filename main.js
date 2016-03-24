@@ -43,7 +43,7 @@ var saveJournal = function() {
  * clicked on, load it up
 ***************************/
 function populateEntryForm(entry) {
-  console.log('POPULATE ENTRY with '+ entry);
+  console.log('POPULATE ENTRY with '+ entry.date + ' and ' + entry.entryId);
   //Call db with user_id and email JSON and get-entry-details action
   var userEmail = localStorage.getItem('user-email');
   var action = 'get-entry-details';
