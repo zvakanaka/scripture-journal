@@ -72,7 +72,7 @@ function getEntryDetails(stringified, url) {
     if (http.readyState == 4 && http.status == 200) {
     	//response
     	var data = (http.responseText);
-    	console.log(data);
+    	console.log('Received: ' + data);
     	data = JSON.parse(data);
     	if (data.error !== undefined) {
     	  console.log('ERROR: ' + data.error);
@@ -85,7 +85,7 @@ function getEntryDetails(stringified, url) {
         document.querySelector("#share-text").value = data.share;
         document.querySelector("#promptings-text").value = data.promptings;
   
-      	console.log('Received from DB: '+data.user + ', '+data.pastThought);
+      	console.log('Received from DB: ' + JSON.stringify(data));
     	}
     }
   };
