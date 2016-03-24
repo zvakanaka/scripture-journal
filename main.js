@@ -70,7 +70,7 @@ var checkEmail = function(email) {
   //call database to check email later
   var emailConfirm = document.querySelector("#user-email-confirm");
   emailConfirm.className = "button-error pure-button";
-  emailConfirm.innerHTML = 'Invalid email';
+  emailConfirm.innerHTML = 'Account Failure';
   
   var userEmail = localStorage.getItem('user-email');
   var action = 'check-email';
