@@ -52,11 +52,10 @@ try {
       $entryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
       $getEntryStmnt = $db->prepare($entryQuery);
       $getEntryStmnt->bindParam(':email', $email);
-      $entryId = $cleanData["entryId"];
-      $getEntryStmnt->bindParam(':entry_id', $entryId);
+      $getEntryStmnt->bindParam(':entry_id', $cleanData["entryId"]);
       $getEntryStmnt->execute();
       //TODO: maybe put this in a function so insert can update
-      $detailedEntries = '{"user": "'.$email.'", "entry":[';
+      $detailedEntries = '{"user": "'.$email.'",';
       $entryRow = $getEntryStmnt->fetch();
       if ($entryRow)
       {
@@ -68,17 +67,14 @@ try {
           $prompting = $entryRow['prompting'];
           $date = $entryRow['entry_date'];
           
-          $detailedEntries .= '{"date":"'.$date.'","entryId":"'.$entryId
+          $detailedEntries .= '"date":"'.$date.'","entryId":"'.$entryId
           .'","pastThought":"'.$pastThought
           .'","question":"'.$question
           .'","share":"'.$share
           .'","promptings":"'.$prompting
-          .'","ponderQuestion":"'.$ponderQuestion.'"},';
+          .'","ponderQuestion":"'.$ponderQuestion.'"}';
+          echo $detailedEntries;//here ya go
       }
-      //remove trailing comma
-      $detailedEntries = rtrim($detailedEntries, ",");
-      $detailedEntries .= ']}';
-      echo $detailedEntries;//here ya go
   }
 
   $query = 'select entry_id, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
