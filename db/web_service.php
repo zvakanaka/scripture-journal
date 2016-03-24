@@ -72,9 +72,13 @@ try {
           .'","question":"'.$question
           .'","share":"'.$share
           .'","promptings":"'.$prompting
-          .'","ponderQuestion":"'.$ponderQuestion.'"}';
-          echo $detailedEntries;//here ya go
+          .'","ponderQuestion":"'.$ponderQuestion.'"';
       }
+      else {
+        $detailedEntries .= '","error":"error"';
+      }
+      $detailedEntries .= '}';
+      echo $detailedEntries;//here ya go
   }
 
   if ($action != "get-entry-details") {
