@@ -61,32 +61,6 @@ function populateEntryForm(entry) {
 }
 
 /***************************
- * CHECK EMAIL
- ***************************/
-var checkEmail = function(email) {
-  localStorage.setItem('user-email', email.value);
-  console.log('Email is ' + email.value);
-  
-  //call database to check email later
-  var emailConfirm = document.querySelector("#user-email-confirm");
-  emailConfirm.className = "button-error pure-button";
-  emailConfirm.innerHTML = 'Account Failure';
-  
-  var userEmail = localStorage.getItem('user-email');
-  var action = 'check-email';
-	
-	var jsonString = {
-                      user: jsonEscape(userEmail),
-                      action: action
-                    };
-
-	var stringified = JSON.stringify(jsonString);
-	
-  //call database to insert
-  database(stringified, 'db/web_service.php');
-};
-
-/***************************
  * GET ENTRY DETAILS
  * from database
  ***************************/
@@ -111,12 +85,38 @@ function getEntryDetails(stringified, url) {
         document.querySelector("#share-text").value = data.share;
         document.querySelector("#promptings-text").value = data.promptings;
   
-      	console.log('Received from DB: '+user);
+      	console.log('Received from DB: '+data.user + ', '+data.pastThought);
     	}
     }
   };
   http.send(stringified);
 }
+
+/***************************
+ * CHECK EMAIL
+ ***************************/
+var checkEmail = function(email) {
+  localStorage.setItem('user-email', email.value);
+  console.log('Email is ' + email.value);
+  
+  //call database to check email later
+  var emailConfirm = document.querySelector("#user-email-confirm");
+  emailConfirm.className = "button-error pure-button";
+  emailConfirm.innerHTML = 'Account Failure';
+  
+  var userEmail = localStorage.getItem('user-email');
+  var action = 'check-email';
+	
+	var jsonString = {
+                      user: jsonEscape(userEmail),
+                      action: action
+                    };
+
+	var stringified = JSON.stringify(jsonString);
+	
+  //call database to insert
+  database(stringified, 'db/web_service.php');
+};
 
 /***************************
  * DATABASE
