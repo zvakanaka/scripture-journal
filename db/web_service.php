@@ -56,16 +56,16 @@ try {
       $getEntryStmnt->execute();
       //TODO: maybe put this in a function so insert can update
       $detailedEntries = '{"user": "'.$email.'",';
-      $entryRow = $getEntryStmnt->fetch();
-      if ($entryRow)
+      $getEntryRow = $getEntryStmnt->fetch();
+      if ($getEntryRow)
       {
-          $entryId = $entryRow['entry_id'];
-          $pastThought = $entryRow['past_thought'];
-          $ponderQuestion = $entryRow['ponder_question'];
-          $question = $entryRow['question'];
-          $share = $entryRow['sharing'];
-          $prompting = $entryRow['prompting'];
-          $date = $entryRow['entry_date'];
+          $entryId = $getEntryRow['entry_id'];
+          $pastThought = $getEntryRow['past_thought'];
+          $ponderQuestion = $getEntryRow['ponder_question'];
+          $question = $getEntryRow['question'];
+          $share = $getEntryRow['sharing'];
+          $prompting = $getEntryRow['prompting'];
+          $date = $getEntryRow['entry_date'];
           
           $detailedEntries .= '"date":"'.$date.'","entryId":"'.$entryId
           .'","pastThought":"'.$pastThought
@@ -75,7 +75,7 @@ try {
           .'","ponderQuestion":"'.$ponderQuestion.'"';
       }
       else {
-        $detailedEntries .= 'error":"error"';
+        $detailedEntries .= '"error":"error"';
       }
       $detailedEntries .= '}';
       echo $detailedEntries;//here ya go
