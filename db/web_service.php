@@ -49,7 +49,7 @@ try {
     $insertEntryStmnt->execute();
     
   } else if ($action == "get-entry-details") {
-      $entryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
+      $getEntryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
       $getEntryStmnt = $db->prepare($entryQuery);
       $getEntryStmnt->bindParam(':email', $email);
       $getEntryStmnt->bindParam(':entry_id', $cleanData["entryId"]);
