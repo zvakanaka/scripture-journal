@@ -8,7 +8,7 @@ function jsonEscape(str)  {
 }
 
 /***************************
- * Save Journal
+ * SAVE JOURNAL
  ***************************/
 var saveJournal = function() {
   var email = document.querySelector("#user-email").value;
@@ -37,7 +37,11 @@ var saveJournal = function() {
   database(stringified, 'db/web_service.php');
 };
 
-//When a sidebar entry is clicked on, load it up
+/***************************
+ * POPULATE ENTRY
+ * When a sidebar entry is
+ * clicked on, load it up
+***************************/
 function populateEntryForm(entry) {
   console.log('POPULATE ENTRY');
   //TODO: Call db with user_id and email JSON and get-entry-details action
@@ -47,7 +51,7 @@ function populateEntryForm(entry) {
 	var jsonString = {
                       user: jsonEscape(userEmail),
                       action: action,
-                      entryId: entryId
+                      entryId: entry.entryId
                     };
 
 	var stringified = JSON.stringify(jsonString);
@@ -57,7 +61,7 @@ function populateEntryForm(entry) {
 }
 
 /***************************
- * Check Email
+ * CHECK EMAIL
  ***************************/
 var checkEmail = function(email) {
   localStorage.setItem('user-email', email.value);
