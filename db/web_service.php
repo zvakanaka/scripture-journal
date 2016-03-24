@@ -77,27 +77,29 @@ try {
       }
   }
 
-  $query = 'select entry_id, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
-  $stmnt = $db->prepare($query);
-  $stmnt->bindParam(':email', $email);
-  $stmnt->execute();
-  //TODO: maybe put this in a function so insert can update
-  $entries = '{"user": "'.$email.'", "entry":[';
-  $entryRow = $stmnt->fetch();//NOTE: is this line overwritten in the loop
-  if ($entryRow)
-  {
-    while($entryRow = $stmnt->fetch())
+  if ($action != "get-entry-details") {
+    $query = 'select entry_id, entry_date from entry where user_id = (select user_id from user where email = :email)'; 
+    $stmnt = $db->prepare($query);
+    $stmnt->bindParam(':email', $email);
+    $stmnt->execute();
+    //TODO: maybe put this in a function so insert can update
+    $entries = '{"user": "'.$email.'", "entry":[';
+    $entryRow = $stmnt->fetch();//NOTE: is this line overwritten in the loop
+    if ($entryRow)
     {
-      $entryId = $entryRow['entry_id'];
-      $date = $entryRow['entry_date'];
-      
-      $entries .= '{"date":"'.$date.'","entryId":"'.$entryId.'"},';
+      while($entryRow = $stmnt->fetch())
+      {
+        $entryId = $entryRow['entry_id'];
+        $date = $entryRow['entry_date'];
+        
+        $entries .= '{"date":"'.$date.'","entryId":"'.$entryId.'"},';
+      }
     }
+    //remove trailing comma
+    $entries = rtrim($entries, ",");
+    $entries .= ']}';
+    echo $entries;//here ya go
   }
-  //remove trailing comma
-  $entries = rtrim($entries, ",");
-  $entries .= ']}';
-  echo $entries;//here ya go
 }
 catch (Exception $ex)
 {
