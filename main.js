@@ -43,9 +43,9 @@ var saveJournal = function() {
  * clicked on, load it up
 ***************************/
 function populateEntryForm(entry) {
-  console.log('POPULATE ENTRY');
-  //TODO: Call db with user_id and email JSON and get-entry-details action
-   var userEmail = localStorage.getItem('user-email');
+  console.log('POPULATE ENTRY with '+ entry);
+  //Call db with user_id and email JSON and get-entry-details action
+  var userEmail = localStorage.getItem('user-email');
   var action = 'get-entry-details';
 	
 	var jsonString = {
@@ -85,6 +85,38 @@ var checkEmail = function(email) {
   //call database to insert
   database(stringified, 'db/web_service.php');
 };
+
+/***************************
+ * GET ENTRY DETAILS
+ * from database
+ ***************************/
+function getEntryDetails(stringified, url) {
+  var http = new XMLHttpRequest(); 
+  http.open("POST", url, true);
+  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  http.onreadystatechange = function() {
+    if (http.readyState == 4 && http.status == 200) {
+    	//response
+    	var data = (http.responseText);
+    	console.log(data);
+    	data = JSON.parse(data);
+    	if (data.error !== undefined) {
+    	  console.log('ERROR: ' + data.error);
+    	} else {                 //all is well
+      	var user = data.user;
+      	  
+        document.querySelector("#past-thoughts-text").value = data.pastThought;
+        document.querySelector("#ponder-question-text").value = data.ponderQuestion;
+        document.querySelector("#question-text").value = data.question;
+        document.querySelector("#share-text").value = data.share;
+        document.querySelector("#promptings-text").value = data.promptings;
+  
+      	console.log('Received from DB: '+user);
+    	}
+    }
+  };
+  http.send(stringified);
+}
 
 /***************************
  * DATABASE
@@ -127,38 +159,6 @@ function database(stringified, url) {
 		      };
 		      j++;
 	      });
-    }
-  };
-  http.send(stringified);
-}
-
-/***************************
- * GET ENTRY DETAILS
- * from database
- ***************************/
-function getEntryDetails(stringified, url) {
-  var http = new XMLHttpRequest(); 
-  http.open("POST", url, true);
-  http.setRequestHeader("Content-type", "application/json; charset=utf-8");
-  http.onreadystatechange = function() {
-    if (http.readyState == 4 && http.status == 200) {
-    	//response
-    	var data = (http.responseText);
-    	console.log(data);
-    	data = JSON.parse(data);
-    	if (data.error !== undefined) {
-    	  console.log('ERROR: ' + data.error);
-    	} else {                 //all is well
-      	var user = data.user;
-      	  
-        document.querySelector("#past-thoughts-text").value = data.pastThought;
-        document.querySelector("#ponder-question-text").value = data.ponderQuestion;
-        document.querySelector("#question-text").value = data.question;
-        document.querySelector("#share-text").value = data.share;
-        document.querySelector("#promptings-text").value = data.promptings;
-  
-      	console.log('Received from DB: '+user);
-    	}
     }
   };
   http.send(stringified);
