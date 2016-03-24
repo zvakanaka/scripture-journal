@@ -50,7 +50,7 @@ try {
     
   } else if ($action == "get-entry-details") {
       $getEntryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
-      $getEntryStmnt = $db->prepare($entryQuery);
+      $getEntryStmnt = $db->prepare($getEntryQuery);
       $getEntryStmnt->bindParam(':email', $email);
       $getEntryStmnt->bindParam(':entry_id', $cleanData["entryId"]);
       $getEntryStmnt->execute();
@@ -75,7 +75,7 @@ try {
           .'","ponderQuestion":"'.$ponderQuestion.'"';
       }
       else {
-        $detailedEntries .= '","error":"error"';
+        $detailedEntries .= 'error":"error"';
       }
       $detailedEntries .= '}';
       echo $detailedEntries;//here ya go
