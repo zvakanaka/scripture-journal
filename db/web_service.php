@@ -52,7 +52,7 @@ try {
       $getEntryQuery = 'select entry_id, past_thought, ponder_question, question, sharing, prompting, entry_date from entry where user_id = (select user_id from user where email = :email) and entry_id = :entryId'; 
       $getEntryStmnt = $db->prepare($getEntryQuery);
       $getEntryStmnt->bindParam(':email', $email);
-      $getEntryStmnt->bindParam(':entry_id', $cleanData["entryId"]);
+      $getEntryStmnt->bindParam(':entryId', $cleanData["entryId"]);
       $getEntryStmnt->execute();
 
       $detailedEntries = '{"user": "'.$email.'",';
