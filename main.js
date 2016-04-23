@@ -83,10 +83,10 @@ function getEntryDetails(stringified, url) {
       	var user = data.user;
       	  
         document.querySelector("#past-thoughts-text").value = jsonUnescape(data.pastThought);
-        document.querySelector("#ponder-question-text").value = data.ponderQuestion;
-        document.querySelector("#question-text").value = data.question;
-        document.querySelector("#share-text").value = data.share;
-        document.querySelector("#promptings-text").value = data.promptings;
+        document.querySelector("#ponder-question-text").value = jsonUnescape(data.ponderQuestion);
+        document.querySelector("#question-text").value = jsonUnescape(data.question);
+        document.querySelector("#share-text").value = jsonUnescape(data.share);
+        document.querySelector("#promptings-text").value = jsonUnescape(data.promptings);
   
       	console.log('Received from DB: ' + JSON.stringify(data));
     	}
