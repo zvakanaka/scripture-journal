@@ -4,7 +4,10 @@ element.innerText = "Scripture Journal";
 //To handle newlines and the like in JSON
 //TODO: this should also be happening on the PHP side... security
 function jsonEscape(str)  {
-    return str.replace(/\n/g, "\\\n").replace(/\r/g, "\\\r").replace(/\t/g, "\\\t");
+    return str.replace(/\n/g, "<br>").replace(/\'/g, "`").replace(/\"/g, "&quot;");
+}
+function jsonUnescape(str)  {
+    return str.replace(/<br>/g, "\n").replace(/`/g, "'").replace(/&quot;/g, "\"");
 }
 
 /***************************
@@ -79,7 +82,7 @@ function getEntryDetails(stringified, url) {
     	} else {                 //all is well
       	var user = data.user;
       	  
-        document.querySelector("#past-thoughts-text").value = data.pastThought;
+        document.querySelector("#past-thoughts-text").value = jsonUnescape(data.pastThought);
         document.querySelector("#ponder-question-text").value = data.ponderQuestion;
         document.querySelector("#question-text").value = data.question;
         document.querySelector("#share-text").value = data.share;
