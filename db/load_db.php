@@ -10,11 +10,9 @@ $dbUser = "root";
 $dbPassword = "";
 $dbName = "journal";
 
-  //echo "Using local credentials: ";
-  //change to require if needed
-  include("set_local_credentials.php");
+  //DANGER: uncomment and place creds in that file unless you have mafia protection
+  //require("set_local_credentials.php");
 
-//echo "host:$dbHost:$dbPort dbName:$dbName user:$dbUser password:$dbPassword<br >\n";
 GLOBAL $db;
 $db = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPassword);
 return $db;
