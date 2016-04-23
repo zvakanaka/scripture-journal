@@ -1,3 +1,6 @@
+-- Careful now
+DROP DATABASE IF EXISTS journal;
+-- redundant check if not exist-I know. You did not see this
 CREATE DATABASE IF NOT EXISTS journal;
 USE journal;
 
@@ -31,4 +34,3 @@ ENGINE = InnoDB;
 -- UPDATE entry SET question = REPLACE(question, '"', '\\"') where entry_id = 26;
 -- The following will escape single quotes
 -- UPDATE entry SET question = REPLACE(question, "'", "\\'") where entry_id = 26;
-
