@@ -1,6 +1,11 @@
 # scripture-journal
 Web app to record journals for religion classes at BYU-Idaho
 <a href="http://howtoterminal.com/scripture-journal">Scripture Journal</a>
-
-If you want to set up quick with <a href="https://codeanywhere.com/">CodeAnywhere</a>:
-`sudo mysql -uroot < scripture-journal/db/setup-db.sql`
+<br>
+## [Codeanywhere](https://codeanywhere.com/) Quick Setup
+1. Make a container
+2. Paste in the shell: 
+```
+git clone https://github.com/zvakanaka/scripture-journal.git
+sudo mysql -uroot < scripture-journal/db/setup-db.sql
+```
