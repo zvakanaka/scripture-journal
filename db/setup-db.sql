@@ -9,18 +9,19 @@ name varchar(255),
 PRIMARY KEY (user_id)
 );
 
--- -----------------------------------------------------
--- Table `journal`.`entry` Created by Olu Egunjobi
--- -----------------------------------------------------
+-- ------------------------------------------------------
+-- Table `journal`.`entry` Created by Olu Egunjobi and me
+-- ------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `journal`.`entry` (
-  `journal_id` INT NOT NULL AUTO_INCREMENT,
+  `entry_id` INT NOT NULL AUTO_INCREMENT,
   user_id int NOT NULL,
   `past_thought` LONGTEXT NULL,
   `ponder_question` LONGTEXT NULL,
   `question` LONGTEXT NULL,
   `prompting` LONGTEXT NULL,
   `sharing` LONGTEXT NULL,
-  PRIMARY KEY (`journal_id`))
+  `entry_date` DATE NOT NULL,
+  PRIMARY KEY (`entry_id`))
 ENGINE = InnoDB;
 
 -- The following statement will delete and entry if you think it is corrupt
