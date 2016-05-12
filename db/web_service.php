@@ -91,13 +91,12 @@ try {
     $entryRow = $stmnt->fetch();//NOTE: is this line overwritten in the loop
     if ($entryRow)
     {
-      while($entryRow = $stmnt->fetch())
-      {
-        $entryId = $entryRow['entry_id'];
+      do {
+      $entryId = $entryRow['entry_id'];
         $date = $entryRow['entry_date'];
         
         $entries .= '{"date":"'.$date.'","entryId":"'.$entryId.'"},';
-      }
+      } while($entryRow = $stmnt->fetch()); 
     }
     //remove trailing comma
     $entries = rtrim($entries, ",");
