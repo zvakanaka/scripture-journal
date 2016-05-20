@@ -1,4 +1,10 @@
 <?php
+//allow cross-site-requesting 
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers');
+?>
+<?php
 // To see errors in console:
 // tail -f /tmp/php-error.log
 ini_set("log_errors", 1);
